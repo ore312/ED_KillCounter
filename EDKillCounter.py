@@ -18,9 +18,10 @@ import datetime
 import sys
 import os
 
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 
 FOLDER_DATA = ".\\data\\"
+FILE_SAVEPATH = ".\\savepath.txt"
 
 TAG_EVENT = "event"
 TAG_SYSTEM = "StarSystem"
@@ -98,7 +99,7 @@ def writeData():
         #     raise TypeError
     aData = sortData(mData)
     aStr = json.dumps(aData, default=json_method, indent=4)
-    with open(FOLDER_DATA + mSaveFile, mode="w") as aFNo:
+    with open(FOLDER_DATA + mSaveFile, mode="w", encoding="utf-8") as aFNo:
         aFNo.write(aStr);
 
 def dispKillData():
@@ -290,6 +291,10 @@ def runDebug(pPath):
             aStr = aByte.decode()
         fncJrl(aStr.split("\r\n"))
 
+def writeSavePath():
+    with open(FILE_SAVEPATH, mode="w", encoding="utf-8") as aFNo:
+        aFNo.write(FOLDER_DATA + mSaveFile)
+
 def main():
     global mSaveFile
 
@@ -317,7 +322,7 @@ def main():
     dispKillData()
     writeData()
 
+    writeSavePath()
+
 if __name__ == "__main__":
     main()
-
-    time.sleep(2)
