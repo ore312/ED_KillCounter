@@ -14,6 +14,7 @@ from EDJournalLib import *
 import json
 import time
 import datetime
+import msvcrt
 #debug
 import sys
 import os
@@ -323,6 +324,16 @@ def main():
     writeData()
 
     writeSavePath()
+
+    #終了待ち
+    print("Press the q key if you want to exit")
+    while True:
+        time.sleep(0.01)
+        if msvcrt.kbhit() == True:
+            if msvcrt.getch().decode() == "q":
+                print("end")
+                #かなり強制的な終了なので気おつけて
+                os._exit(1)
 
 if __name__ == "__main__":
     main()
