@@ -19,7 +19,7 @@ import msvcrt
 import sys
 import os
 
-VERSION = "0.0.6"
+VERSION = "0.0.7"
 
 FOLDER_DATA = ".\\data\\"
 FILE_SAVEPATH = ".\\savepath.txt"
@@ -287,7 +287,7 @@ def runDebug(pPath):
             continue
 
         aStr = None
-        with open(aP, "rb") as f:
+        with open(aP, mode="rb", encoding="utf-8") as f:
             aByte = f.read()
             aStr = aByte.decode()
         fncJrl(aStr.split("\r\n"))
@@ -331,6 +331,7 @@ def main():
         time.sleep(0.01)
         if msvcrt.kbhit() == True:
             if msvcrt.getch().decode() == "q":
+                writeData()
                 print("end")
                 #かなり強制的な終了なので気おつけて
                 os._exit(1)
