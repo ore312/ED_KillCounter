@@ -281,16 +281,15 @@ def fncJrl(pJrl):
         #     pass
 
 def runDebug(pPath):
-    for aP in pPath:
+    for aP in pPath[1:]:
         if os.path.exists(aP) != True:
-            # print("error:invalid path")
+            print("error:invalid path")
             continue
 
-        aStr = None
-        with open(aP, mode="rb", encoding="utf-8") as f:
-            aByte = f.read()
-            aStr = aByte.decode()
-        fncJrl(aStr.split("\r\n"))
+        aStr = ""
+        with open(aP, mode="r", encoding="utf-8") as f:
+            aStr = f.read()
+        fncJrl(aStr.split("\n"))
 
 def writeSavePath():
     with open(FILE_SAVEPATH, mode="w", encoding="utf-8") as aFNo:
@@ -331,7 +330,6 @@ def main():
         time.sleep(0.01)
         if msvcrt.kbhit() == True:
             if msvcrt.getch().decode() == "q":
-                writeData()
                 print("end")
                 #かなり強制的な終了なので気おつけて
                 os._exit(1)
